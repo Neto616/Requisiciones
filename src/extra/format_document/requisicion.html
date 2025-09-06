@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td {
+        border: 1px solid black;
+        padding: 8px;
+      }
+
+      .radioBtn {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div name="top-side">
+      <label for="">
+        <b>Req. No.</b>
+      </label>
+
+      <input
+        type="text"
+        readonly
+        style="color: red; font-weight: bold"
+        value="RE-040825-41"
+      />
+      <p style="font-size: 10px">
+        REQ. No.(RE-DDMMAA-CONSECUTIVO) EJEMPLO: RE-311224-01
+      </p>
+
+      <label for="">
+        <b>Fecha:</b>
+      </label>
+
+      <input
+        type="text"
+        readonly
+        style="font-weight: bold"
+        value="05/08/2025"
+      />
+      <p style="font-size: 10px">EJEMPLO: 31/12/2024</p>
+    </div>
+
+    <div name="options">
+      <div name="area">
+        <label for=""><b>Área que solicita:</b></label>
+        <label class="radioBtn" for="ofi_opt">OFICINA</label>
+        <input type="radio" name="area" id="ofi_opt" value="OFICINA" />
+        <label class="radioBtn" for="project_opt">PROYECTO</label>
+        <input type="radio" name="area" id="project_opt" value="PROYECTO" />
+      </div>
+
+      <div name="solicitud">
+        <label for=""><b>Tipo de Solicitud:</b></label>
+        <label for="" class="radioBtn">Compra</label>
+        <input type="radio" name="solicitud" id="compra_soli" />
+        <lable for="renta_soli" class="radioBtn">Renta</lable>
+        <input type="radio" name="solicitud" id="renta_soli" />
+        <label for="service_soli" class="radioBtn">Servicio</label>
+        <input type="radio" name="solicitud" id="service_soli" />
+      </div>
+
+      <div name="suministro">
+        <label for=""><b>Tipo de Suministro:</b></label>
+        <label for="consumibles_soli" class="radioBtn">Consumibles</label>
+        <input type="radio" name="suministro" id="consumibles_soli" />
+        <label for="materiales_soli" class="radioBtn">Suministro</label>
+        <input type="radio" name="suministro" id="materiales_soli" />
+        <label for="normal_soli" class="radioBtn">Normal</label>
+        <input type="radio" name="suministro" id="normal_soli" />
+        <label for="" class="radioBtn">Urgente</label>
+        <input type="radio" name="suministro" id="urgente_soli" />
+      </div>
+    </div>
+
+    <div name="table">
+      <table>
+        <tr>
+          <td colspan="7"></td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>REPOSICION DE CASETAS</td>
+          <td></td>
+          <td></td>
+          <td>martes, 5 de agosto de 2025</td>
+          <td>TRANSFERENCIA A FERNANDA PARA DISPERSION</td>
+          <td>$ 349.00</td>
+        </tr>
+        <tr style="font-size: 12px">
+          <td>*RUBEN MORALES</td>
+          <td>SERVICIO</td>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div name="firmas"></div>
+
+    <div name="notas" style="margin-top: 20px">
+      <table style="width: 100%">
+        <tr>
+          <th style="text-align: center">NOTAS:</th>
+        </tr>
+        <tr>
+          <td style="width: 100px; height: 100px"></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
