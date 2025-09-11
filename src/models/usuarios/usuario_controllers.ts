@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import { IUserController } from "../interfaces/user/interface_user_controller.js";
+import UsuarioService from "./usuario_service.js";
 
 class UsuarioController implements IUserController {
+    // private user_service: UsuarioService;
+
     constructor(){}
 
     async crear(req: Request, res: Response): Promise<Response> {
@@ -25,3 +28,5 @@ class UsuarioController implements IUserController {
         return res.status(200);
     }
 }
+
+export default UsuarioController;

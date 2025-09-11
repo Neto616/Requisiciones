@@ -67,3 +67,24 @@ export class ErrorRequisicionNotExist extends Error {
         this.name = "ErrorRequisicionNotExist";
     }
 }
+
+export class ExtensionNotPermited extends Error {
+    constructor(mensaje: string) {
+        super(mensaje);
+        this.name = "ExtensionNotPermited";
+    }
+}
+
+export class ErrorSavingFile extends Error {
+    constructor(mensaje: string) {
+        super(mensaje);
+        this.name = "ErrorSavingFile";
+    }
+}
+
+export class ErrorDeletingFile extends Error {
+    constructor(mensaje: string) {
+        super(mensaje);
+        this.name = "ErrorDeletingFile";
+    }
+}

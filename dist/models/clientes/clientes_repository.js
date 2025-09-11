@@ -2,6 +2,7 @@ import Cliente from "./clientes.js";
 import { ESTATUS_CLIENTE } from "../../types/clientes.js";
 import { ClaseRepo } from "../abstract_classes/clasesRepo.js";
 import { ErrorDeleting, ErrorFinding, ErrorUpdating } from "../errors/class_error.js";
+import { ErrorClientExists } from "../errors/error_info.js";
 export class ClienteRepository extends ClaseRepo {
     db;
     constructor(db) {
@@ -43,6 +44,19 @@ export class ClienteRepository extends ClaseRepo {
             and id = $1
         `;
         const sql_resultado = await this.db.query(query, [id, ESTATUS_CLIENTE.ACTIVO]);
+        return sql_resultado.length ? true : false;
+    }
+    async isExist(data) {
+        const query = `
+            SELECT 
+                1
+            FROM clientes
+            where estatus = $1
+            and nombres = $2
+            and apellidos = $3
+            and correo = $4;
+        `;
+        const sql_resultado = await this.db.query(query, [ESTATUS_CLIENTE.ACTIVO, data.nombre, data.apellidos, data.correo, data.wpp, data.estatus]);
         return sql_resultado.length ? true : false;
     }
     /**
@@ -87,6 +101,14 @@ export class ClienteRepository extends ClaseRepo {
         return info;
     }
     async crear(data) {
+        if (await this.isExist(data))
+            throw new ErrorClientExists("Cliente con datos similares existentes");
+        const query = `
+            INSERT INTO clientes 
+            (nombres, apellidos, correo, whatsapp, estatus, fecha_alta) values
+            ($1, $2, $3, $4, $5, NOW());
+        `;
+        await this.db.query(query, [data.nombre, data.apellidos, data.correo, data.wpp, data.estatus]);
     }
     /**
      * Función que actualiza los datos de un cliente
@@ -95,12 +117,12 @@ export class ClienteRepository extends ClaseRepo {
      *
      * No retorna nada pero ante la situación tira un error personalizado
      */
-    async actualizar(id, new_data) {
+    async actualizar(id, new_data, other_data = { estatus: ESTATUS_CLIENTE }) {
         if (!(await this.isExistById(id)))
             throw new ErrorFinding("El cliente no esta dado de alta");
         try {
             const query = `
-                UPDATE
+                UPDATE clientes
                 SET nombres = $1,
                 apellidos = $2,
                 correo = $3,
@@ -109,7 +131,7 @@ export class ClienteRepository extends ClaseRepo {
                 WHERE id = $6
                 and estatus = $7;
             `;
-            await this.db.query(query, [...new_data.getAllData(), id, ESTATUS_CLIENTE.ACTIVO]);
+            await this.db.query(query, [new_data.nombre, new_data.apellidos, new_data.correo, new_data.estatus, id, other_data.estatus]);
         }
         catch (error) {
             console.error(error);

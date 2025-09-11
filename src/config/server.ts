@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import fileUpload from "express-fileupload";
 import session from "express-session";
 
 class Server {
@@ -16,6 +17,10 @@ class Server {
                 path: "*"
             }
         }))
+        this.app.use(fileUpload({
+            limits: { fileSize: 50 * 1024 *1024 }
+        }))
+        
         this.app.use(()=>console.log("C papu"));
     }
 

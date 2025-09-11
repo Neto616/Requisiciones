@@ -1,4 +1,3 @@
-import { validate_email } from "../../utils.js";
 class UsuarioAbstract {
     nombre;
     apellidos;
@@ -15,13 +14,6 @@ class UsuarioAbstract {
      */
     getFullName() {
         return this.nombre.concat(" ", this.apellidos);
-    }
-    /**
-     * checkMail
-     */
-    checkMail() {
-        if (!validate_email(this.correo))
-            throw new Error("El correo no tiene el formato correcto");
     }
 }
 export default UsuarioAbstract;
