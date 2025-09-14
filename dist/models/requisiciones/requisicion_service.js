@@ -1,14 +1,23 @@
 import { ESTATUS_REQUISICIONES } from "../../types/requisiciones.js";
-import { ErrorData, ErrorRequisicionExist, ErrorRequisicionNotExist } from "../errors/error_info.js";
+import { EmptyInfoError, ErrorData, ErrorRequisicionExist, ErrorRequisicionNotExist } from "../errors/error_info.js";
 import RequisicionValidator from "./requisicion_validator.js";
 import Requisiciones from "./requisiciones.js";
 class RequisicionService {
     repo;
-    constructor(repo) {
+    user_service;
+    constructor(repo, user_service) {
         this.repo = repo;
+        this.user_service = user_service;
     }
     async crear(data) {
         RequisicionValidator.validate(data);
+        const [usuario_elaboro, usuario_revisa, usuario_autoriza] = await Promise.all([
+            this.user_service.getInfo(data.elaboro_id),
+            this.user_service.getInfo(data.revisa_id),
+            this.user_service.getInfo(data.autoriza_id)
+        ]);
+        if (!usuario_elaboro.length || !usuario_revisa.length || !usuario_autoriza.length)
+            throw new EmptyInfoError("No existe el usuario solicitado.");
         const requisicion = new Requisiciones(data.numero_control, data.elaboro_id, data.cliente_id, data.revisa_id, data.autoriza_id, data.solicitud, data.suministro, data.obra, data.costo, data.numero_orden);
         const isExist = await this.repo.getByData(requisicion);
         if (isExist)

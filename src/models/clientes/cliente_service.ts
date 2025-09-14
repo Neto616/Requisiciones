@@ -1,9 +1,8 @@
-import { ClienteDatos, ClienteForm, ErrorCreate, ErrorInfo, ErrorUpdateDelete, ESTATUS_CLIENTE, SuccessCreate, SuccessInfo, SuccessUpdateDelete } from "../../types/clientes.js";
-import { ErrorTypeData } from "../errors/error_info.js";
+import { ClienteDatos, ClienteForm, ESTATUS_CLIENTE } from "../../types/clientes.js";
 import { IclaseRepo } from "../interfaces/interface_class_repo.js";
-import { IClienteService } from "../interfaces/interface_cliente_service";
-import ClienteValidator from "./cliente_validator";
-import Cliente from "./clientes";
+import { IClienteService } from "../interfaces/clientes/interface_cliente_service.js";
+import ClienteValidator from "./cliente_validator.js";
+import Cliente from "./clientes.js";
 
 export class ClienteService implements IClienteService {
     constructor(

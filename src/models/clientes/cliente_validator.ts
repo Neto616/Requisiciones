@@ -1,7 +1,6 @@
-import { ClienteForm, ESTATUS_CLIENTE } from "../../types/clientes.js";
+import { ClienteForm } from "../../types/clientes.js";
 import { validate_email } from "../../utils.js";
 import { EmailDenied, EmptyInfoError } from "../errors/error_info.js";
-import Cliente from "./clientes.js";
 
 class ClienteValidator {
     /**

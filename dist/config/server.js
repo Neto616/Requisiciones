@@ -2,6 +2,7 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import session from "express-session";
 import user_route from "../routes/user.routes.js";
+import client_route from "../routes/client.routes.js";
 class Server {
     port;
     app;
@@ -30,6 +31,7 @@ class Server {
     setRoutes() {
         this.app.get("/", (req, res) => res.send("prueba"));
         this.app.use(user_route);
+        this.app.use(client_route);
     }
     listen() {
         this.app.listen(this.port, () => {

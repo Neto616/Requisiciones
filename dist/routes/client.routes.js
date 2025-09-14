@@ -1,0 +1,16 @@
+import { Router } from "express";
+import ClienteController from "../models/clientes/cliente_controller.js";
+import { ClienteService } from "../models/clientes/cliente_service.js";
+import { ClienteRepository } from "../models/clientes/clientes_repository.js";
+import DBPostgre from "../config/db.js";
+const router = Router();
+const db = new DBPostgre();
+const client_repo = new ClienteRepository(db);
+const client_service = new ClienteService(client_repo);
+const client_controller = new ClienteController(client_service);
+router.get("/clientes", [], async (req, res) => await client_controller.getAll(req, res));
+router.get("/cliente/:id", [], async (req, res) => await client_controller.getInfo(req, res));
+router.post("/cliente", [], async (req, res) => await client_controller.crear(req, res));
+router.put("/cliente/:id", [], async (req, res) => await client_controller.actualizar(req, res));
+router.delete("/cliente/:id", [], async (req, res) => await client_controller.eliminar(req, res));
+export default router;

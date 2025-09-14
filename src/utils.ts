@@ -23,6 +23,10 @@ declare global {
   }
 }
 
+export function validate_users_id(id: string): boolean {
+  return id !== "" && !isNaN(Number(id));
+}
+
 export function validate_email(correo: string): boolean{
     if(!correo.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) return false;
 

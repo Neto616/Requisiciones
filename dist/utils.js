@@ -1,6 +1,9 @@
 import CryptoJS from "crypto-js";
 import { EmptyInfoError } from "./models/errors/error_info.js";
 const key = "CryptoKeyFromTheProjectCreatedByME_160603";
+export function validate_users_id(id) {
+    return id !== "" && !isNaN(Number(id));
+}
 export function validate_email(correo) {
     if (!correo.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
         return false;

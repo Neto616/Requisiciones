@@ -1,6 +1,6 @@
 import { ESTATUS_CLIENTE } from "../../types/clientes.js";
-import ClienteValidator from "./cliente_validator";
-import Cliente from "./clientes";
+import ClienteValidator from "./cliente_validator.js";
+import Cliente from "./clientes.js";
 export class ClienteService {
     repository;
     constructor(repository) {

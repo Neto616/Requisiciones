@@ -1,14 +1,25 @@
 import { ESTATUS_REQUISICIONES, RequisicionAllList, RequisicionDatos, RequisicionesForm } from "../../types/requisiciones.js";
-import { ErrorData, ErrorRequisicionExist, ErrorRequisicionNotExist } from "../errors/error_info.js";
+import { EmptyInfoError, ErrorData, ErrorRequisicionExist, ErrorRequisicionNotExist } from "../errors/error_info.js";
 import { IRequisicionRepo, IRequisicionService } from "../interfaces/interface_requisicion.js";
+import { IUserService } from "../interfaces/user/interface_user_service.js";
 import RequisicionValidator from "./requisicion_validator.js";
 import Requisiciones from "./requisiciones.js";
 
 class RequisicionService implements IRequisicionService{
-    constructor(private repo: IRequisicionRepo){}
+    constructor(
+        private repo: IRequisicionRepo,
+        private user_service: IUserService
+    ){}
 
     async crear(data: RequisicionesForm): Promise<void> {
         RequisicionValidator.validate(data);
+        const [usuario_elaboro, usuario_revisa, usuario_autoriza] = await Promise.all([
+            this.user_service.getInfo(data.elaboro_id),
+            this.user_service.getInfo(data.revisa_id),
+            this.user_service.getInfo(data.autoriza_id)
+        ])
+
+        if(!usuario_elaboro.length || !usuario_revisa.length || !usuario_autoriza.length) throw new EmptyInfoError("No existe el usuario solicitado.");
         const requisicion: Requisiciones = new Requisiciones(data.numero_control, 
             data.elaboro_id, data.cliente_id, data.revisa_id, 
             data.autoriza_id, data.solicitud, data.suministro, 

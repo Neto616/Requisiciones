@@ -1,6 +1,5 @@
 import { ESTATUS_CLIENTE } from "../../types/clientes.js";
 import UsuarioAbstract from "../abstract_classes/usuario.js";
-import { EmptyInfoError } from "../errors/error_info.js";
 
 class Cliente extends UsuarioAbstract{
     constructor(

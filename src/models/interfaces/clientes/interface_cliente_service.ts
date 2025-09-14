@@ -1,4 +1,4 @@
-import { ClienteDatos, ClienteForm } from "../../types/clientes.js";
+import { ClienteDatos, ClienteForm } from "../../../types/clientes.js";
 
 export interface IClienteService {
     crear(data: ClienteForm): Promise<void>;

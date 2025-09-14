@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from "express";
 import fileUpload from "express-fileupload";
 import session from "express-session";
 import user_route from "../routes/user.routes.js";
-
+import client_route from "../routes/client.routes.js"
 class Server {
     constructor(private port: number, private app: Express = express()) {
         this.setMdw();
@@ -30,6 +30,7 @@ class Server {
     private setRoutes(): void {
         this.app.get("/", (req: Request, res: Response)=> res.send("prueba"))
         this.app.use(user_route);
+        this.app.use(client_route);
     }
 
     public listen() {
