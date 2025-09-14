@@ -7,6 +7,6 @@ export function hasPermission(permited_types: Array<TIPO_USER>) {
 
         if(user_type && permited_types.includes(user_type)) return next();
         
-        return res.status(403).json({ estatus: 0, msj: "El usuario no tiene permisos"});
+        return res.status(403).json({ estatus: 0, message: "El usuario no tiene permisos"});
     }
 }

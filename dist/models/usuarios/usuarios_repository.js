@@ -124,7 +124,7 @@ class UsuarioRepository extends ClaseRepo {
      */
     async actualizar(id, new_data, other_data = { estatus: ESTATUS_CLIENTE }) {
         if (!(await this.isExistById(id)))
-            throw new ErrorUserExists("El usuario a actualizar no existe");
+            throw new ErrorUserNotExist("El usuario a actualizar no existe");
         const query = `
             UPDATE usuarios
             SET nombres = $1,

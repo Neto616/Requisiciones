@@ -130,7 +130,7 @@ class UsuarioRepository extends ClaseRepo<Usuario> implements IclaseRepo<Usuario
      * @param new_data 
      */
     async actualizar(id: number, new_data: Usuario, other_data = {estatus: ESTATUS_CLIENTE}): Promise<void> {
-        if(!(await this.isExistById(id))) throw new ErrorUserExists("El usuario a actualizar no existe");
+        if(!(await this.isExistById(id))) throw new ErrorUserNotExist("El usuario a actualizar no existe");
         const query: string = `
             UPDATE usuarios
             SET nombres = $1,

@@ -20,7 +20,7 @@ class UsuarioService implements IUserService {
     }
 
     public async eliminar(id: number): Promise<void> {
-        await this.eliminar(id);
+        await this.repository.eliminar(id);
     }
 
     public async getInfo(id: number): Promise<Array<UsuarioDatos>> {

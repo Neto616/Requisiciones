@@ -1,6 +1,7 @@
 import express from "express";
 import fileUpload from "express-fileupload";
 import session from "express-session";
+import user_route from "../routes/user.routes.js";
 class Server {
     port;
     app;
@@ -8,8 +9,10 @@ class Server {
         this.port = port;
         this.app = app;
         this.setMdw();
+        this.setRoutes();
     }
     setMdw() {
+        this.app.use(express.json());
         this.app.use(session({
             secret: "llav3_de_PruebaENloqueS3Est4Pr0BanDp",
             resave: false,
@@ -22,9 +25,11 @@ class Server {
         this.app.use(fileUpload({
             limits: { fileSize: 50 * 1024 * 1024 }
         }));
-        this.app.use(() => console.log("C papu"));
+        // this.app.use(()=>console.log("C papu"));
     }
-    setRoutes(app) {
+    setRoutes() {
+        this.app.get("/", (req, res) => res.send("prueba"));
+        this.app.use(user_route);
     }
     listen() {
         this.app.listen(this.port, () => {

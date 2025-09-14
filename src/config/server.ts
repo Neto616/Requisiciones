@@ -1,13 +1,16 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import fileUpload from "express-fileupload";
 import session from "express-session";
+import user_route from "../routes/user.routes.js";
 
 class Server {
     constructor(private port: number, private app: Express = express()) {
         this.setMdw();
+        this.setRoutes();
     }
 
     private setMdw(): void {
+        this.app.use(express.json())
         this.app.use(session({
             secret: "llav3_de_PruebaENloqueS3Est4Pr0BanDp",
             resave: false,
@@ -21,10 +24,12 @@ class Server {
             limits: { fileSize: 50 * 1024 *1024 }
         }))
         
-        this.app.use(()=>console.log("C papu"));
+        // this.app.use(()=>console.log("C papu"));
     }
 
-    private setRoutes(app: Function): void {
+    private setRoutes(): void {
+        this.app.get("/", (req: Request, res: Response)=> res.send("prueba"))
+        this.app.use(user_route);
     }
 
     public listen() {

@@ -17,7 +17,7 @@ class UsuarioService {
         await this.repository.actualizar(id, user, { estatus });
     }
     async eliminar(id) {
-        await this.eliminar(id);
+        await this.repository.eliminar(id);
     }
     async getInfo(id) {
         const user_info = await this.repository.getInfo(id);
