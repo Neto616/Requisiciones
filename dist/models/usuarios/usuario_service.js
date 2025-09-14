@@ -23,8 +23,9 @@ class UsuarioService {
         const user_info = await this.repository.getInfo(id);
         return user_info;
     }
-    async getAllInfo() {
-        const all_user_info = await this.repository.getAll();
+    async getAllInfo(list_estatus) {
+        const all_user_info = await this.repository.getAll(list_estatus);
+        console.log(`Datos obtenidos: ${all_user_info}`);
         return all_user_info;
     }
 }

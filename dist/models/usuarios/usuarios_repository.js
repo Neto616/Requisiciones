@@ -83,13 +83,15 @@ class UsuarioRepository extends ClaseRepo {
      * @returns Arreglo con toda la información de todos los usuarios
      * id, nombre, apellido, usuario, correo, contraseña, tipo, estatus, fecha alta, fecha de baja
      */
-    async getAll() {
+    async getAll(list_estatus) {
+        const index_estatus = list_estatus.map((e, index) => `$${index + 1}`).join(",");
         const query = `
             SELECT
                 *
-            FROM usuarios;
+            FROM usuarios
+            WHERE ESTATUS IN (${index_estatus});
         `;
-        const sql_results = await this.db.query(query);
+        const sql_results = await this.db.query(query, list_estatus);
         if (!sql_results.length)
             return [];
         const array_users_info = sql_results.map(e => ({

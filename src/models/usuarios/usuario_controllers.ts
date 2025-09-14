@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IUserController } from "../interfaces/user/interface_user_controller.js";
 import { IUserService } from "../interfaces/user/interface_user_service.js";
-import { UsuarioDatos, UsuarioForm } from "../../types/usuarios.js";
+import { ESTATUS_USER, UsuarioDatos } from "../../types/usuarios.js";
 import { ESTATUS_RESPONSE, MSG_RESPONSE } from "../../types/general.js";
 import { EmptyInfoError, ErrorTypeData, ErrorUserExists, ErrorUserNotExist, PassworDenied } from "../errors/error_info.js";
 
@@ -108,7 +108,7 @@ class UsuarioController implements IUserController {
 
     async getAll(req: Request, res: Response): Promise<Response> {
         try{
-            const list_all_user: Array<UsuarioDatos> = await this.user_service.getAllInfo();
+            const list_all_user: Array<UsuarioDatos> = await this.user_service.getAllInfo([ESTATUS_USER.ACTIVO]);
             return res.status(200).json({
                 estatus: ESTATUS_RESPONSE.SUCCESS,
                 users_list: list_all_user

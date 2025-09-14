@@ -89,13 +89,15 @@ class UsuarioRepository extends ClaseRepo<Usuario> implements IclaseRepo<Usuario
      * @returns Arreglo con toda la información de todos los usuarios
      * id, nombre, apellido, usuario, correo, contraseña, tipo, estatus, fecha alta, fecha de baja
      */
-    async getAll(): Promise<Array<UsuarioDatos>> {
+    async getAll(list_estatus: Array<ESTATUS_USER>): Promise<Array<UsuarioDatos>> {
+        const index_estatus: string = list_estatus.map((e, index) => `$${index + 1}`).join(",")
         const query: string = `
             SELECT
                 *
-            FROM usuarios;
+            FROM usuarios
+            WHERE ESTATUS IN (${index_estatus});
         `
-        const sql_results = await this.db.query<UsuarioQuery>(query);
+        const sql_results = await this.db.query<UsuarioQuery>(query, list_estatus);
         if(!sql_results.length) return [];
 
         const array_users_info: Array<UsuarioDatos> = sql_results.map( e => ({

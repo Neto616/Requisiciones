@@ -28,8 +28,9 @@ class UsuarioService implements IUserService {
         return user_info;
     }
 
-    public async getAllInfo(): Promise<Array<UsuarioDatos>> {
-        const all_user_info: Array<UsuarioDatos> = await this.repository.getAll();
+    public async getAllInfo(list_estatus: Array<ESTATUS_USER>): Promise<Array<UsuarioDatos>> {
+        const all_user_info: Array<UsuarioDatos> = await this.repository.getAll(list_estatus);
+        console.log(`Datos obtenidos: ${all_user_info}`)
         return all_user_info;
     }
 }

@@ -1,3 +1,4 @@
+import { ESTATUS_USER } from "../../types/usuarios.js";
 import { ESTATUS_RESPONSE, MSG_RESPONSE } from "../../types/general.js";
 import { EmptyInfoError, ErrorTypeData, ErrorUserExists, ErrorUserNotExist, PassworDenied } from "../errors/error_info.js";
 class UsuarioController {
@@ -96,7 +97,7 @@ class UsuarioController {
     }
     async getAll(req, res) {
         try {
-            const list_all_user = await this.user_service.getAllInfo();
+            const list_all_user = await this.user_service.getAllInfo([ESTATUS_USER.ACTIVO]);
             return res.status(200).json({
                 estatus: ESTATUS_RESPONSE.SUCCESS,
                 users_list: list_all_user
